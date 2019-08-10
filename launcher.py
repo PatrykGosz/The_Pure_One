@@ -39,16 +39,14 @@ class main_menu:
             file_id += 1
             if file.split("_")[0] != "save":
                 pass
-            else:  # TODO
+            else:
                 try:
-                    pass
-                except:
-                    pass
-                else:
-                    pass
+                    with open(f"saved_games/{file}") as temp_file:
+                        save_name_line = temp_file.readline()
+                        save_name = save_name_line.split(" ")[2]
+                        print(save_name)
                 finally:
                     pass
-
     def _saved_files(self):
         list_of_saved_files = os.listdir(self.SAVED_FILES_PATH)
         list_of_saved_files.sort()
@@ -56,5 +54,4 @@ class main_menu:
 
 
 if __name__ == '__main__':
-
-    print(main_menu()._saved_files())
+    main_menu().menu()
