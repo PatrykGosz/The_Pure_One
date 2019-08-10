@@ -35,7 +35,6 @@ class main_menu:
         print("\nSaves:\n")
 
         counter = 0
-        all_saves_names = []
 
         list_of_saved_files = os.listdir(self.SAVED_FILES_PATH)
         list_of_saved_files.sort()
