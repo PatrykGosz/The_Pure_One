@@ -29,7 +29,7 @@ class main_menu:
         the_pure_one.Game().main()  # TODO
 
     def _new_game(self):
-        pass  # TODO
+        the_pure_one.Game().main()  # TODO
 
     def _choose_save_file(self):
         all_saves_names = self._print_saved_files()
@@ -50,13 +50,13 @@ class main_menu:
             if file.split("_")[0] != "save":
                 pass
             else:
-                try:
-                    with open(f"saved_games/{file}") as temp_file:
-                        save_name_line = temp_file.readlines()
+                with open(f"saved_games/{file}") as temp_file:
+                    save_name_line = temp_file.readlines()
+                    try:
                         save_name = save_name_line[0].split(" ")[2]
-                        save_name_all.append(save_name)
-                finally:
-                    pass  # TODO
+                    except IndexError:
+                        save_name = (f"Save {file} corrupted!")
+                    save_name_all.append(save_name)
         return save_name_all
 
     def _saved_files(self):
