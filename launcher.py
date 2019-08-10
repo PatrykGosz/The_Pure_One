@@ -20,7 +20,7 @@ class main_menu:
         elif users_selections == "2":
             self._new_game()
         elif users_selections == "3":
-            self._choose_save_file()
+            self._saved_games()
         else:
             print("You must select a valid number!")
             self.menu()
@@ -31,39 +31,32 @@ class main_menu:
     def _new_game(self):
         the_pure_one.Game().main()  # TODO
 
-    def _choose_save_file(self):
-        all_saves_names = self._print_saved_files()
-        counter = 0
+    def _saved_games(self):
         print("\nSaves:\n")
-        for name in all_saves_names:
-            counter += 1
-            print(f"{counter}. {name}")
-        print(f"\n{counter + 1}. Return")
-        print("\nYour selection: ")
 
-        # TODO
+        counter = 0
+        all_saves_names = []
 
-    def _print_saved_files(self):
-        save_name_all = []
-        list_of_saved_files = self._saved_files()
+        list_of_saved_files = os.listdir(self.SAVED_FILES_PATH)
+        list_of_saved_files.sort()
+
         for file in list_of_saved_files:
             if file.split("_")[0] != "save":
                 pass
             else:
-                with open(f"saved_games/{file}") as temp_file:
+                with open(f"{self.SAVED_FILES_PATH}{file}") as temp_file:
                     save_name_line = temp_file.readlines()
                     try:
                         save_name = save_name_line[0].split(" ")[2]
                     except IndexError:
                         save_name = (f"Save {file} corrupted!")
-                    save_name_all.append(save_name)
-        return save_name_all
+                    counter += 1
+                    print(f"{counter}. {save_name}")
 
-    def _saved_files(self):
-        list_of_saved_files = os.listdir(self.SAVED_FILES_PATH)
-        list_of_saved_files.sort()
-        return list_of_saved_files
+        print(f"\n{counter + 1}. Return")
+        print("\nYour selection: ")
 
+        # TODO
 
 if __name__ == '__main__':
     main_menu().menu()
