@@ -35,7 +35,9 @@ class main_menu:
             self.menu()
 
     def _continue_game(self):
-        pass  # TODO
+        the_pure_one.Game().main(
+            f"{self.SAVED_FILES_PATH}{(sorted(self.sorted_list_of_saved_games, reverse=True))[0]}"
+        )
 
     def _new_game(self):
         pass  # TODO
