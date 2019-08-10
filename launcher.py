@@ -1,5 +1,5 @@
-from saved_games import *
 import os
+import the_pure_one
 
 
 class main_menu:
@@ -21,22 +21,23 @@ class main_menu:
         elif users_selections == "2":
             self._new_game()
         elif users_selections == "3":
-            self._print_saved_files()
+            self._choose_save_file()
         else:
             print("You must select a valid number!")
             self.menu()
 
     def _continue_game(self):
-        pass  # TODO
+        the_pure_one.Game().main()  # TODO
 
     def _new_game(self):
         pass  # TODO
 
+    def _choose_save_file(self):
+        pass  # TODO
+
     def _print_saved_files(self):
         list_of_saved_files = self._saved_files()
-        file_id = 0
         for file in list_of_saved_files:
-            file_id += 1
             if file.split("_")[0] != "save":
                 pass
             else:
@@ -46,7 +47,8 @@ class main_menu:
                         save_name = save_name_line.split(" ")[2]
                         print(save_name)
                 finally:
-                    pass
+                    pass  # TODO
+
     def _saved_files(self):
         list_of_saved_files = os.listdir(self.SAVED_FILES_PATH)
         list_of_saved_files.sort()
