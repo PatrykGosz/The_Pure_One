@@ -52,8 +52,8 @@ class main_menu:
             else:
                 try:
                     with open(f"saved_games/{file}") as temp_file:
-                        save_name_line = temp_file.readline()
-                        save_name = save_name_line.split(" ")[2]
+                        save_name_line = temp_file.readlines()
+                        save_name = save_name_line[0].split(" ")[2]
                         save_name_all.append(save_name)
                 finally:
                     pass  # TODO
