@@ -2,7 +2,7 @@ import os
 import the_pure_one
 
 
-class main_menu:
+class MainMenu:
     SAVED_FILES_PATH = "saved_games/"
 
     def __init__(self):
@@ -27,7 +27,7 @@ class main_menu:
         if users_selections == 1:
             self._continue_game()
         elif users_selections == 2:
-            self._new_game()
+            self.generate_new_save_file()
         elif users_selections == 3:
             self._saved_games()
         else:
@@ -39,8 +39,30 @@ class main_menu:
             f"{self.SAVED_FILES_PATH}{(sorted(self.sorted_list_of_saved_games, reverse=True))[0]}"
         )
 
-    def _new_game(self):
-        pass  # TODO
+    def generate_new_save_file(self):
+        counter = 1
+        flag_new_save_file_generated = False
+
+        for file in self.sorted_list_of_saved_games:
+            if counter != int((file.split(".")[0]).split("_")[1]):
+                with open(f"{self.SAVED_FILES_PATH}save_{counter + 1}.txt", "w") as new_game_temp:
+                    new_game_temp.write(f"{self._generate_new_save_file_content()}")
+                    flag_new_save_file_generated = True
+                    break
+            else:
+                counter += 1
+
+        if not flag_new_save_file_generated:
+            with open(f"{self.SAVED_FILES_PATH}save_{counter}.txt", "w") as new_game_temp:
+                new_game_temp.write(f"{self._generate_new_save_file_content()}")
+                flag_new_save_file_generated = True
+
+        print(f"\nStarting new game in save file \"save_{counter}.txt\"\n")
+        the_pure_one.Game().main(f"{self.SAVED_FILES_PATH}save_{counter}.txt")
+
+    def _generate_new_save_file_content(self):  # TODO
+        save_file_content = "NAME = C1E27"
+        return save_file_content
 
     def _saved_games(self):
         print("\nSaves:\n")
@@ -70,4 +92,4 @@ class main_menu:
 
 
 if __name__ == '__main__':
-    main_menu().menu()
+    MainMenu().menu()
