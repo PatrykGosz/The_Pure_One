@@ -56,7 +56,6 @@ class main_menu:
                     save_name = (f"Save {file} corrupted!")
                 counter += 1
                 print(f"{counter}. {save_name}")
-
         print(f"\n{counter + 1}. Return")
 
         users_selections = int(input("\nYour selection: "))
